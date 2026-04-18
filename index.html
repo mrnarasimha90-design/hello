@@ -1,4 +1,6 @@
-<!--<!DOCTYPE html>
+<!--"Hello" display html code
+
+<!DOCTYPE html>
 <html>
 <head>
   <title>Hello Site</title>
@@ -6,4 +8,117 @@
 <body>
   <h1>Hello</h1>
 </body>
-</html>-->
+</html>
+-->
+<!--
+// sample project to create website 12 click buttons shows number in center display
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Page Interactive Navigator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // TAILWIND CONFIGURATION (OPTIONAL CUSTOMIZATION)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4f46e5', // Indigo-600
+                        'secondary': '#f9fafb', // Gray-50
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-secondary text-gray-900 min-h-screen flex flex-col font-sans">
+
+    <header class="bg-white shadow-md p-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <h1 class="text-2xl font-bold text-primary">My 12-Page Site</h1>
+            <nav class="space-x-4">
+                <a href="#" class="text-gray-700 hover:text-primary transition">Home</a>
+                <a href="#" class="text-gray-700 hover:text-primary transition">About</a>
+                <a href="#" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
+        
+        <div class="mb-12">
+            <h2 class="text-xl text-center font-semibold text-gray-600 mb-6">Navigate Pages</h2>
+            
+            <div id="button-grid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                </div>
+        </div>
+
+        <div class="bg-white p-16 rounded-3xl shadow-2xl border border-gray-100 flex flex-col items-center justify-center text-center">
+            <p class="text-sm uppercase font-semibold text-gray-400 tracking-wider mb-2">You are viewing:</p>
+            <div class="flex items-center space-x-4">
+                <span class="text-3xl text-gray-400 font-light">PAGE</span>
+                <h3 id="active-page-display" class="text-9xl font-extrabold text-primary animate-pulse">1</h3>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 p-6 mt-12 text-center">
+        <p>&copy; 2023 My Sample Company. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const totalPages = 12;
+        const buttonGrid = document.getElementById('button-grid');
+        const pageDisplay = document.getElementById('active-page-display');
+
+        // FUNCTION 1: GENERATE THE 12 BUTTONS DYNAMICALLY
+        function generateButtons() {
+            for (let i = 1; i <= totalPages; i++) {
+                // Create the button element
+                const button = document.createElement('button');
+                button.innerText = `Page ${i}`;
+                
+                // Add Tailwind classes (this is the key!)
+                button.className = "px-5 py-3 rounded-xl font-medium transition duration-300 ease-in-out border text-center";
+                
+                // Styling for "Inactive" buttons
+                button.classList.add("bg-white", "text-gray-700", "border-gray-200", "hover:border-primary", "hover:text-primary", "hover:bg-indigo-50");
+
+                // Set unique ID and Click Listener
+                button.id = `btn-${i}`;
+                button.onclick = () => showPage(i);
+
+                // Add button to the grid
+                buttonGrid.appendChild(button);
+            }
+        }
+
+        // FUNCTION 2: CHANGE THE DISPLAY & UPDATE BUTTON STYLING
+        function showPage(pageNumber) {
+            // Update the central text number
+            pageDisplay.innerText = pageNumber;
+
+            // Reset ALL buttons back to inactive styling
+            const allButtons = buttonGrid.querySelectorAll('button');
+            allButtons.forEach(btn => {
+                btn.classList.add("bg-white", "text-gray-700", "border-gray-200");
+                btn.classList.remove("bg-primary", "text-white", "border-primary", "scale-105");
+            });
+
+            // "Activate" ONLY the clicked button
+            const activeButton = document.getElementById(`btn-${pageNumber}`);
+            activeButton.classList.remove("bg-white", "text-gray-700", "border-gray-200");
+            activeButton.classList.add("bg-primary", "text-white", "border-primary", "scale-105");
+        }
+
+        // Initialize by generating the buttons and starting on Page 1
+        generateButtons();
+        showPage(1); // Set initial active state
+
+    </script>
+</body>
+</html>
