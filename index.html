@@ -2,73 +2,90 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>ARehT Search</title>
+<title>ARehT Corporate Intro</title>
 
 <style>
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: #fff;
-        color: #202124;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #f7f9fc;
+        color: #1a1a1a;
         overflow-x: hidden;
     }
 
-    /* Center container */
     .center {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
+        padding: 20px;
     }
 
-    /* Final Logo */
+    /* Corporate Logo */
     .logo {
-        font-size: 72px;
-        font-weight: bold;
-        letter-spacing: 3px;
+        font-size: 68px;
+        font-weight: 600;
+        letter-spacing: 2px;
         opacity: 0;
-        animation: fadeInLogo 2s ease forwards;
-        animation-delay: 3s;
+        animation: fadeInLogo 1.8s ease forwards;
+        animation-delay: 2.2s;
     }
 
     .blue {
-        color: #1a73e8; /* Bright Google Blue */
+        color: #0056d2; /* Corporate Blue */
     }
 
     .orange {
-        color: #ff8c00; /* Orange */
+        color: #e67e22; /* Corporate Orange */
     }
 
-    /* Story text animation */
-    .story {
-        font-size: 22px;
-        margin-top: 20px;
-        opacity: 0;
-        animation: fadeInStory 2s ease forwards;
-        animation-delay: 5s;
-        text-align: center;
-        max-width: 700px;
-        line-height: 1.6;
-    }
-
-    /* Ra + The animation */
+    /* Origin text */
     .origin {
-        font-size: 48px;
-        font-weight: bold;
+        font-size: 40px;
+        font-weight: 500;
         opacity: 0;
-        animation: fadeInOrigin 2s ease forwards;
-        animation-delay: 1s;
+        animation: fadeInOrigin 1.5s ease forwards;
+        animation-delay: 0.8s;
+        color: #333;
     }
 
     @keyframes fadeInOrigin {
-        from { opacity: 0; transform: translateY(20px); }
+        from { opacity: 0; transform: translateY(25px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeInLogo {
-        from { opacity: 0; transform: scale(0.8); }
-        to { opacity: 1; transform: scale(1); }
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Underline */
+    .underline {
+        width: 0;
+        height: 3px;
+        background: #0056d2;
+        margin-top: 12px;
+        animation: underlineGrow 1.5s ease forwards;
+        animation-delay: 2.8s;
+    }
+
+    @keyframes underlineGrow {
+        from { width: 0; }
+        to { width: 200px; }
+    }
+
+    /* Corporate Story */
+    .story {
+        font-size: 20px;
+        margin-top: 30px;
+        max-width: 750px;
+        text-align: center;
+        line-height: 1.7;
+        opacity: 0;
+        animation: fadeInStory 2s ease forwards;
+        animation-delay: 3.5s;
+        color: #444;
     }
 
     @keyframes fadeInStory {
@@ -76,20 +93,6 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Subtle underline animation */
-    .underline {
-        width: 0;
-        height: 4px;
-        background: #1a73e8;
-        margin-top: 10px;
-        animation: underlineGrow 2s ease forwards;
-        animation-delay: 3.5s;
-    }
-
-    @keyframes underlineGrow {
-        from { width: 0; }
-        to { width: 180px; }
-    }
 </style>
 </head>
 
@@ -97,24 +100,24 @@
 
 <div class="center">
 
-    <!-- Origin animation -->
+    <!-- Origin Animation -->
     <div class="origin">
         <span class="blue">Ra</span> + <span class="orange">The</span>
     </div>
 
-    <!-- Final logo -->
+    <!-- Final Corporate Logo -->
     <div class="logo">
         <span class="blue">A</span><span class="blue">R</span><span class="orange">eh</span><span class="blue">T</span>
     </div>
 
     <div class="underline"></div>
 
-    <!-- Story text -->
+    <!-- Corporate Story -->
     <div class="story">
-        The name <strong>ARehT</strong> is derived from two beloved inspirations:<br><br>
-        <strong>Ra</strong> — from <em>Ramachandra</em>, father of co‑founder Narasimha.<br>
-        <strong>The</strong> — from <em>Thejovathi</em>, mother of the co‑founder.<br><br>
-        Together, these meaningful fragments form the identity of the company — <strong>ARehT</strong>.
+        The name <strong>ARehT</strong> carries a legacy rooted in family values and respect.<br><br>
+        <strong>Ra</strong> — inspired by <em>Ramachandra</em>, father of co‑founder Narasimha.<br>
+        <strong>The</strong> — drawn from <em>Thejovathi</em>, mother of the co‑founder.<br><br>
+        These meaningful origins combine to form a name that reflects heritage, integrity, and purpose — <strong>ARehT</strong>.
     </div>
 
 </div>
