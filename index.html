@@ -1,186 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>ARehT Trapezoid Search</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARehT</title>
+
+<style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #f9fafb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f7fa;
+        color: #222;
     }
 
-    .container {
-      text-align: center;
+    /* Header */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 25px;
+        background: #ffffff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
 
-    /* Trapezoidal search bar container */
-    .trapezoid-wrapper {
-      margin: 40px auto;
-      width: 420px;
-      position: relative;
-      perspective: 800px;
+    .logo {
+        font-size: 26px;
+        font-weight: bold;
+        color: #2a7ae2;
     }
 
+    .tagline {
+        font-size: 12px;
+        color: #444;
+        margin-top: -5px;
+    }
+
+    .header-icons {
+        display: flex;
+        gap: 20px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    /* Trapezoid Search Box */
     .trapezoid {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      padding: 18px 24px;
-      border-radius: 10px;
-      transform: skewX(-12deg);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+        margin: 40px auto;
+        width: 90%;
+        max-width: 600px;
+        background: #ffffff;
+        padding: 30px;
+        clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        text-align: center;
     }
 
-    .trapezoid-inner {
-      transform: skewX(12deg);
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .trapezoid h1 {
+        margin: 0;
+        font-size: 32px;
+        color: #2a7ae2;
+        font-weight: bold;
     }
 
-    .trapezoid-inner input[type="text"] {
-      flex: 1;
-      padding: 10px 12px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-      font-size: 14px;
+    .search-bar {
+        margin-top: 20px;
+        display: flex;
+        background: #f1f3f4;
+        border-radius: 25px;
+        padding: 10px 15px;
+        box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
     }
 
-    .trapezoid-inner button {
-      padding: 10px 18px;
-      border-radius: 6px;
-      border: none;
-      background: #0f172a;
-      color: #f9fafb;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
+    .search-bar input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 16px;
+        outline: none;
     }
 
-    .trapezoid-inner button:hover {
-      background: #020617;
-      transform: translateY(-1px);
+    /* Category Grid */
+    .grid {
+        margin: 40px auto;
+        width: 90%;
+        max-width: 900px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
     }
 
-    /* ARehT branding with human-liking images */
-    .brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
+    .item {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: 0.2s;
     }
 
-    .brand-title {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #22c55e;
-      text-shadow: 0 0 18px rgba(34, 197, 94, 0.7);
+    .item:hover {
+        background: #e8f0fe;
+        transform: translateY(-3px);
     }
 
-    .brand-subtitle {
-      font-size: 14px;
-      color: #cbd5f5;
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+        .trapezoid h1 {
+            font-size: 26px;
+        }
+        .item {
+            font-size: 14px;
+        }
     }
-
-    .human-liking-row {
-      margin-top: 12px;
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .human-card {
-      background: #1e293b;
-      border-radius: 999px;
-      padding: 6px 10px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.7);
-    }
-
-    .human-avatar {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f97316, #fb7185);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .human-text {
-      font-size: 12px;
-      color: #e5e7eb;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .heart {
-      color: #fb7185;
-      font-size: 14px;
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <!-- ARehT branding -->
-    <div class="brand">
-      <div class="brand-title">ARehT</div>
-      <div class="brand-subtitle">
-        Discover what humans love—search ideas, inspirations, and experiences.
-      </div>
 
-      <!-- Human liking images / avatars -->
-      <div class="human-liking-row">
-        <div class="human-card">
-          <div class="human-avatar">A</div>
-          <div class="human-text">
-            <span class="heart">❤️</span> “ARehT makes my searches feel human.”
-          </div>
-        </div>
-        <div class="human-card">
-          <div class="human-avatar">R</div>
-          <div class="human-text">
-            <span class="heart">💚</span> “I find what I truly care about.”
-          </div>
-        </div>
-        <div class="human-card">
-          <div class="human-avatar">T</div>
-          <div class="human-text">
-            <span class="heart">💙</span> “Clean design, human‑first results.”
-          </div>
-        </div>
-      </div>
+<!-- Header -->
+<div class="header">
+    <div>
+        <div class="logo">ARehT</div>
+        <div class="tagline">Earth → ARehT ← Heart</div>
     </div>
 
-    <!-- Trapezoidal search bar -->
-    <div class="trapezoid-wrapper">
-      <div class="trapezoid">
-        <form class="trapezoid-inner" action="#" method="get">
-          <input
-            type="text"
-            name="q"
-            placeholder="Search with ARehT..."
-            aria-label="Search"
-          />
-          <button type="submit">Search</button>
-        </form>
-      </div>
+    <div class="header-icons">
+        <span>🏠</span>
+        <span>🔍</span>
+        <span>🔲</span>
     </div>
-  </div>
+</div>
+
+<!-- Trapezoid Search Section -->
+<div class="trapezoid">
+    <h1>ARehT</h1>
+    <div class="search-bar">
+        <input type="text" placeholder="Search ARehT services...">
+    </div>
+</div>
+
+<!-- Category Grid -->
+<div class="grid">
+    <div class="item">Nature Trips</div>
+    <div class="item">Farm</div>
+    <div class="item">Education</div>
+    <div class="item">Family Tree</div>
+    <div class="item">Transport</div>
+    <div class="item">Architecture</div>
+    <div class="item">Real Estate</div>
+
+    <div class="item">Digital Shopping</div>
+    <div class="item">Machinery</div>
+    <div class="item">Convey</div>
+    <div class="item">Earth</div>
+    <div class="item">CSR</div>
+    <div class="item">News</div>
+</div>
+
 </body>
 </html>
